@@ -10,7 +10,7 @@ public class Portfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String portfolioName;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -24,12 +24,12 @@ public class Portfolio {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPortfolioName() {
+        return portfolioName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPortfolioName(String name) {
+        this.portfolioName = name;
     }
 
     public User getUser() {
