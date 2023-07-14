@@ -25,6 +25,6 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="/stock/form">Dodaj akcję</a>
+<a href="/stock/add">Dodaj akcję</a>
 </body>
 </html>

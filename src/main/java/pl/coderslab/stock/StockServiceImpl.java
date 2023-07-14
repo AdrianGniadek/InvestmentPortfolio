@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StockServiceImpl implements StockService {
+public class
+StockServiceImpl implements StockService {
 
     private final StockRepository stockRepository;
 
