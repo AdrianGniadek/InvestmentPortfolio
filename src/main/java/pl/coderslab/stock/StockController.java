@@ -3,10 +3,10 @@ package pl.coderslab.stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/stock")
@@ -33,7 +33,10 @@ public class StockController {
     }
 
     @PostMapping("/add")
-    public String processStockForm(@ModelAttribute Stock stock) {
+    public String processStockForm(@Valid Stock stock, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "stock/stockForm";
+        }
         stockService.saveStock(stock);
         return "redirect:/stock";
     }

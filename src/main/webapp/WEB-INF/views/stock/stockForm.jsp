@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add Stock</h1>
-<form action="/stock" method="post">
+<form method="post">
     <label for="symbol">Symbol:</label>
     <input type="text" id="symbol" name="symbol" required><br><br>
 
@@ -15,7 +15,7 @@
 
     <label for="price">Price:</label>
     <input type="text" id="price" name="price" required><br><br>
-
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <button type="submit">Submit</button>
 </form>
 </body>
