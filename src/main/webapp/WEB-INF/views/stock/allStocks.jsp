@@ -13,6 +13,7 @@
         <th>Symbol</th>
         <th>Name</th>
         <th>Price</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
             <td>${stock.symbol}</td>
             <td>${stock.name}</td>
             <td>${stock.price}</td>
+            <td><a href="/stock/details?stockId=${stock.id}">Wyświetl szczegóły</a></td>
         </tr>
     </c:forEach>
     </tbody>
