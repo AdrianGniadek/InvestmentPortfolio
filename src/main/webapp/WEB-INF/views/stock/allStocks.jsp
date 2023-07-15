@@ -22,7 +22,11 @@
             <td>${stock.symbol}</td>
             <td>${stock.name}</td>
             <td>${stock.price}</td>
-            <td><a href="/stock/details?stockId=${stock.id}">Wyświetl szczegóły</a></td>
+            <td>
+                <a href="/stock/addDetails?stockId=${stock.id}">
+                    <button type="button">Dodaj szczegóły</button>
+                </a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

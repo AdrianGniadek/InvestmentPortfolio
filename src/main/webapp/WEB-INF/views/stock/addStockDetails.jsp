@@ -8,7 +8,7 @@
 <h1>Add Stock Details</h1>
 <h2>${stock.name} (${stock.symbol})</h2>
 
-<form action="/stock/details" method="POST">
+<form method="POST">
     <input type="hidden" name="stockId" value="${stock.id}">
     <label for="quantity">Quantity:</label>
     <input type="number" id="quantity" name="quantity"><br><br>
