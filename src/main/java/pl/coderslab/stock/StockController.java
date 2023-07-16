@@ -57,13 +57,26 @@ public class StockController {
     }
 
     @PostMapping("/addDetails")
-    public String processStockDetailsForm(@Valid @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset, BindingResult bindingResult) {
+    public String processStockDetailsForm(@RequestParam("stockId") Long stockId, @Valid @ModelAttribute("portfolioAsset")
+    PortfolioAsset portfolioAsset, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "stock/addStockDetails";
         }
+
+        Stock stock = stockService.getStockById(stockId);
+        if (stock == null) {
+            return "redirect:/stock";
+        }
+
+        portfolioAsset.setStock(stock);
         portfolioAsset.setPurchaseDate(LocalDateTime.now());
         portfolioAssetService.savePortfolioAsset(portfolioAsset);
 
-        return "redirect:/stock";
+        PortfolioAsset updatedPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAsset.getId());
+
+        model.addAttribute("stock", stock);
+        model.addAttribute("portfolioAsset", updatedPortfolioAsset);
+
+        return "stock/stockDetailsView";
     }
 }

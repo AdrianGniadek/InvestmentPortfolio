@@ -1,7 +1,10 @@
 package pl.coderslab.stock;
 
+import pl.coderslab.portfolio.PortfolioAsset;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Stock {
@@ -14,6 +17,16 @@ public class Stock {
     private String name;
 
     private BigDecimal price;
+    @OneToMany(mappedBy = "stock")
+    private List<PortfolioAsset> portfolioAssets;
+
+    public List<PortfolioAsset> getPortfolioAssets() {
+        return portfolioAssets;
+    }
+
+    public void setPortfolioAssets(List<PortfolioAsset> portfolioAssets) {
+        this.portfolioAssets = portfolioAssets;
+    }
 
     public Long getId() {
         return id;

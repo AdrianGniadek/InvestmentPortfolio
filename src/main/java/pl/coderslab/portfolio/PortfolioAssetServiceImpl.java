@@ -19,4 +19,9 @@ public class PortfolioAssetServiceImpl implements PortfolioAssetService {
     public void savePortfolioAsset(PortfolioAsset portfolioAsset) {
         portfolioAssetRepository.save(portfolioAsset);
     }
+
+    @Override
+    public PortfolioAsset getPortfolioAssetById(Long id) {
+        return portfolioAssetRepository.findById(id).orElse(null);
+    }
 }

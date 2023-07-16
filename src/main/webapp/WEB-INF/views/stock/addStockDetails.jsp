@@ -16,6 +16,7 @@
     <input type="number" id="assetValue" name="assetValue"><br><br>
     <label for="purchaseDate">Purchase Date:</label>
     <input type="text" id="purchaseDate" name="purchaseDate"><br><br>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Add Details">
 </form>
 </body>

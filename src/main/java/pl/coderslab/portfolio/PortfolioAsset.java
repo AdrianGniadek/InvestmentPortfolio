@@ -17,7 +17,7 @@ public class PortfolioAsset {
     private Portfolio portfolio;
 
     @ManyToOne
-    @JoinColumn(name = "stock_symbol")
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     private BigDecimal quantity;
@@ -25,6 +25,7 @@ public class PortfolioAsset {
     private BigDecimal assetValue;
 
     private LocalDateTime purchaseDate;
+
     public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }

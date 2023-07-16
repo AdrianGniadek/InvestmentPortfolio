@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,25 +9,22 @@
 <h1>Stock Details</h1>
 <h2>${stock.name} (${stock.symbol})</h2>
 
-<h3>Purchase History</h3>
+<h3>Portfolio Asset Details</h3>
 <table>
-    <thead>
     <tr>
-        <th>Date</th>
         <th>Quantity</th>
         <th>Asset Value</th>
+        <th>Purchase Date</th>
     </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="purchase" items="${portfolioAsset.purchases}">
+    <c:forEach var="asset" items="${portfolioAssets}">
         <tr>
-            <td>${purchase.purchaseDate}</td>
-            <td>${purchase.quantity}</td>
-            <td>${purchase.assetValue}</td>
+            <td>${asset.quantity}</td>
+            <td>${asset.assetValue}</td>
+            <td>${asset.purchaseDate}</td>
         </tr>
     </c:forEach>
-    </tbody>
 </table>
 <a href="/stock/addDetails?stockId=${stock.id}">Add Details</a>
+<a href="/stock">Return</a>
 </body>
 </html>
