@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.user.User;
 import pl.coderslab.user.UserService;
 
 import java.util.List;
@@ -37,5 +38,22 @@ public class PortfolioServiceImpl implements PortfolioService {
         String username = authentication.getName();
         List<Portfolio> portfolios = portfolioRepository.findAllPortfoliosByUserUsername(username);
         return portfolios;
+    }
+    @Override
+    public Portfolio getPortfolioById(Long id) {
+        return portfolioRepository.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public void deletePortfolio(Portfolio portfolio) {
+        portfolioRepository.delete(portfolio);
+    }
+
+    @Override
+    public void setActivePortfolio(Portfolio portfolio) {
+        User loggedInUser = userService.getLoggedInUser();
+        loggedInUser.setActivePortfolio(portfolio);
+        userService.saveUser(loggedInUser);
     }
 }

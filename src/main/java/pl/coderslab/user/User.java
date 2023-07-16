@@ -1,5 +1,6 @@
 package pl.coderslab.user;
 
+import pl.coderslab.portfolio.Portfolio;
 import pl.coderslab.role.Role;
 
 import javax.persistence.*;
@@ -16,6 +17,17 @@ public class User {
     private int enabled;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
+    @OneToOne
+    @JoinColumn(name = "active_portfolio_id")
+    private Portfolio activePortfolio;
+
+    public Portfolio getActivePortfolio() {
+        return activePortfolio;
+    }
+
+    public void setActivePortfolio(Portfolio activePortfolio) {
+        this.activePortfolio = activePortfolio;
+    }
 
     public Long getId() {
         return id;

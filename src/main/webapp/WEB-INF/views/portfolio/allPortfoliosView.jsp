@@ -10,12 +10,18 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="portfolio" items="${portfolios}">
         <tr>
             <td>${portfolio.portfolioName}</td>
+            <td>
+                <a href="/portfolio/edit/${portfolio.id}">Edit</a>
+                <a href="/portfolio/delete/${portfolio.id}">Delete</a>
+                <a href="/portfolio/switch/${portfolio.id}">Switch</a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

@@ -16,11 +16,11 @@
         <th>Asset Value</th>
         <th>Purchase Date</th>
     </tr>
-    <c:forEach var="asset" items="${portfolioAssets}">
+    <c:forEach var="portfolioAsset" items="${portfolioAssets}">
         <tr>
-            <td>${asset.quantity}</td>
-            <td>${asset.assetValue}</td>
-            <td>${asset.purchaseDate}</td>
+            <td>${portfolioAsset.quantity}</td>
+            <td>${portfolioAsset.assetValue}</td>
+            <td>${portfolioAsset.purchaseDate}</td>
         </tr>
     </c:forEach>
 </table>
