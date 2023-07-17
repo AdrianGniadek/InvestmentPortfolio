@@ -51,26 +51,42 @@ public class PortfolioController {
     }
 
     @GetMapping("/portfolio/delete/{id}")
-    public String deletePortfolio(@PathVariable("id") Long id) {
+    public String confirmDeletePortfolio(@PathVariable("id") Long id, Model model) {
         Portfolio portfolio = portfolioService.getPortfolioById(id);
-
         if (portfolio == null) {
             return "errorPage";
         }
+        model.addAttribute("portfolio", portfolio);
+        return "portfolio/deletePortfolioView";
+    }
 
+    @PostMapping("/portfolio/delete/{id}")
+    public String deletePortfolio(@PathVariable("id") Long id) {
+        Portfolio portfolio = portfolioService.getPortfolioById(id);
+        if (portfolio == null) {
+            return "errorPage";
+        }
         portfolioService.deletePortfolio(portfolio);
-
         return "redirect:/portfolios";
     }
 
     @GetMapping("/portfolio/switch/{id}")
+    public String confirmSwitchPortfolio(@PathVariable("id") Long id, Model model) {
+        Portfolio portfolio = portfolioService.getPortfolioById(id);
+        if (portfolio == null) {
+            return "errorPage";
+        }
+        model.addAttribute("portfolio", portfolio);
+        return "portfolio/switchPortfolioView";
+    }
+
+    @PostMapping("/portfolio/switch/{id}")
     public String switchPortfolio(@PathVariable("id") Long id) {
         Portfolio portfolio = portfolioService.getPortfolioById(id);
         if (portfolio == null) {
             return "errorPage";
         }
         portfolioService.setActivePortfolio(portfolio);
-
         return "redirect:/";
     }
 }

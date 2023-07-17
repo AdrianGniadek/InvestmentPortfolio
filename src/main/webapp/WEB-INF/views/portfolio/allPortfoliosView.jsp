@@ -30,6 +30,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <a href="/" class="button">Return</a>
 </div>
 </body>
 </html>

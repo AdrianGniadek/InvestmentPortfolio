@@ -19,9 +19,9 @@
 <h1>Edit portfolio</h1>
 <form action="/portfolio/edit/${portfolio.id}" method="post">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="${portfolio.portfolioName}" required><br>
+    <input type="text" id="name" name="name" value="${portfolio.portfolioName}" required><br><br>
     <label for="description">Description:</label>
-    <textarea id="description" name="description">${portfolio.description}</textarea><br>
+    <input type="text" id="description" name="description" value="${portfolio.description}"><br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Save">
 </form>
