@@ -16,9 +16,9 @@
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" required>
         </div>
-        <div class="buttons">
+        <div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="submit" value="Add">
+            <input type="submit" class="button" value="Add">
             <a href="/portfolios" class="button">Cancel</a>
         </div>
     </form>

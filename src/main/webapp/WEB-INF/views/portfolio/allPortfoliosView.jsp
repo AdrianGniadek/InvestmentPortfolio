@@ -30,8 +30,8 @@
         </c:forEach>
         </tbody>
     </table>
-    <a href="/" class="button">Return</a>
     <a href="/add" class="button">Add Portfolio</a>
+    <a href="/" class="button">Return</a>
 </div>
 </body>
 </html>

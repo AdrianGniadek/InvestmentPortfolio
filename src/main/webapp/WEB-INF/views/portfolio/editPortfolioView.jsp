@@ -24,6 +24,7 @@
     <input type="text" id="description" name="description" value="${portfolio.description}"><br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Save">
+    <a href="/portfolios"><button type="button">Return</button></a>
 </form>
 </body>
 </html>

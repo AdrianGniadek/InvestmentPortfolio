@@ -2,6 +2,17 @@
 <html>
 <head>
     <title>Delete Portfolio</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 <h1>Delete Portfolio</h1>
