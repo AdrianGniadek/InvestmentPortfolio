@@ -3,28 +3,31 @@
 <html>
 <head>
     <title>All Portfolios</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<h1>All Portfolios</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="portfolio" items="${portfolios}">
+<div class="container">
+    <h1>All Portfolios</h1>
+    <table>
+        <thead>
         <tr>
-            <td>${portfolio.portfolioName}</td>
-            <td>
-                <a href="/portfolio/edit/${portfolio.id}">Edit</a>
-                <a href="/portfolio/delete/${portfolio.id}">Delete</a>
-                <a href="/portfolio/switch/${portfolio.id}">Switch</a>
-            </td>
+            <th>Name</th>
+            <th>Actions</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="portfolio" items="${portfolios}">
+            <tr>
+                <td>${portfolio.portfolioName}</td>
+                <td>
+                    <button onclick="location.href='/portfolio/edit/${portfolio.id}'">Edit</button>
+                    <button onclick="location.href='/portfolio/delete/${portfolio.id}'">Delete</button>
+                    <button onclick="location.href='/portfolio/switch/${portfolio.id}'">Switch</button>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
