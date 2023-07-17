@@ -31,6 +31,7 @@
         </tbody>
     </table>
     <a href="/" class="button">Return</a>
+    <a href="/add" class="button">Add Portfolio</a>
 </div>
 </body>
 </html>

@@ -29,8 +29,15 @@ public class PortfolioServiceImpl implements PortfolioService {
     public String getPortfolioNameForLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Portfolio portfolio = portfolioRepository.findByUserUsername(username);
-        return portfolio != null ? portfolio.getPortfolioName() : null;
+        List<Portfolio> portfolios = portfolioRepository.findAllPortfoliosByUserUsername(username);
+
+        if (portfolios.isEmpty()) {
+            return null;
+        } else if (portfolios.size() == 1) {
+            return portfolios.get(0).getPortfolioName();
+        } else {
+            return portfolios.get(0).getPortfolioName();
+        }
     }
     @Override
     public List<Portfolio> getAllPortfoliosForLoggedInUser() {
@@ -55,5 +62,10 @@ public class PortfolioServiceImpl implements PortfolioService {
         User loggedInUser = userService.getLoggedInUser();
         loggedInUser.setActivePortfolio(portfolio);
         userService.saveUser(loggedInUser);
+    }
+    @Override
+    public Portfolio getPortfolioForLoggedInUser() {
+        User loggedInUser = userService.getLoggedInUser();
+        return loggedInUser.getActivePortfolio();
     }
 }

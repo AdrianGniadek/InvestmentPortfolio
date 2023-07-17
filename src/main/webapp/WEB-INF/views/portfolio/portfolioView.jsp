@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="center">Witaj w swoim portfolio: ${portfolioName}</h1>
+    <h1 class="center">Witaj w swoim portfolio: ${portfolio.getPortfolioName()}</h1>
     <a href="/portfolios" class="button">Przejdź do listy portfolio</a>
     <a href="/stock" class="button">Przejdź do swoich akcji</a>
 </div>

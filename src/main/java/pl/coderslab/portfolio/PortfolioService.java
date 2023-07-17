@@ -11,4 +11,5 @@ public interface PortfolioService {
     void deletePortfolio(Portfolio portfolio);
 
     void setActivePortfolio(Portfolio portfolio);
+    Portfolio getPortfolioForLoggedInUser();
 }

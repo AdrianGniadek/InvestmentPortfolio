@@ -4,24 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.user.User;
+import pl.coderslab.user.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class PortfolioController {
     private final PortfolioService portfolioService;
+    private final UserService userService;
 
     @Autowired
-    public PortfolioController(PortfolioService portfolioService) {
+    public PortfolioController(PortfolioService portfolioService, UserService userService) {
         this.portfolioService = portfolioService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public String start(Model model) {
         String portfolioName = portfolioService.getPortfolioNameForLoggedInUser();
+        Portfolio portfolio = portfolioService.getPortfolioForLoggedInUser();
         model.addAttribute("portfolioName", portfolioName);
+        model.addAttribute("portfolio", portfolio);
         return "portfolio/portfolioView";
     }
+
     @GetMapping("/portfolios")
     public String showPortfolios(Model model) {
         List<Portfolio> portfolios = portfolioService.getAllPortfoliosForLoggedInUser();
@@ -66,7 +74,12 @@ public class PortfolioController {
         if (portfolio == null) {
             return "errorPage";
         }
-        portfolioService.deletePortfolio(portfolio);
+        List<Portfolio> userPortfolios = portfolioService.getAllPortfoliosForLoggedInUser();
+        if (userPortfolios.size() > 1) {
+            portfolioService.deletePortfolio(portfolio);
+        } else {
+            return "errorPage";
+        }
         return "redirect:/portfolios";
     }
 
@@ -88,6 +101,25 @@ public class PortfolioController {
         }
         portfolioService.setActivePortfolio(portfolio);
         return "redirect:/";
+    }
+    @GetMapping("/add")
+    public String showAddPortfolioForm() {
+        return "portfolio/addPortfolio";
+    }
+
+    @PostMapping("/add")
+    public String addPortfolio(
+            @RequestParam("name") String name,
+            @RequestParam("description") String description) {
+        Portfolio portfolio = new Portfolio();
+        portfolio.setPortfolioName(name);
+        portfolio.setDescription(description);
+
+        User loggedInUser = userService.getLoggedInUser();
+        portfolio.setUser(loggedInUser);
+
+        portfolioService.save(portfolio);
+        return "redirect:/portfolios";
     }
 }
 

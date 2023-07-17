@@ -9,6 +9,7 @@
     <h1>Confirm Portfolio Switch</h1>
     <p>Are you sure you want to switch to the portfolio: ${portfolio.portfolioName}?</p>
     <form action="/portfolio/switch/${portfolio.id}" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit">Confirm</button>
         <button onclick="location.href='/portfolios'" type="button">Cancel</button>
     </form>
