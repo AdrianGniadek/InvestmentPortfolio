@@ -3,9 +3,7 @@ package pl.coderslab.portfolio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +37,13 @@ public class PortfolioController {
         model.addAttribute("portfolio", portfolio);
 
         return "portfolio/editPortfolioView";
+    }
+    @PostMapping("/portfolio/edit/{id}")
+    public String updatePortfolio(@PathVariable("id") Long id, @RequestParam("name") String name) {
+        Portfolio portfolio = portfolioService.getPortfolioById(id);
+        portfolio.setPortfolioName(name);
+        portfolioService.save(portfolio);
+        return "redirect:/portfolios";
     }
 
     @GetMapping("/portfolio/delete/{id}")
