@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit portfolio name</title>
+    <title>Edit portfolio</title>
     <style>
         body {
             display: flex;
@@ -16,10 +16,12 @@
     </style>
 </head>
 <body>
-<h1>Edit portfolio name</h1>
+<h1>Edit portfolio</h1>
 <form action="/portfolio/edit/${portfolio.id}" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="${portfolio.portfolioName}" required><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description">${portfolio.description}</textarea><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Save">
 </form>
