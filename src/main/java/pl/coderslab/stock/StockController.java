@@ -78,4 +78,15 @@ public class StockController {
 
         return "stock/stockDetailsView";
     }
+    @GetMapping("/stockDetails/{stockId}")
+    public String showStockDetails(@PathVariable("stockId") Long stockId, Model model) {
+        Stock stock = stockService.getStockById(stockId);
+        if (stock == null) {
+            return "redirect:/stock";
+        }
+        model.addAttribute("stock", stock);
+        Iterable<PortfolioAsset> portfolioAssets = portfolioAssetService.getPortfolioAssetsByStock(stock);
+        model.addAttribute("portfolioAssets", portfolioAssets);
+        return "stock/stockDetailsView";
+    }
 }

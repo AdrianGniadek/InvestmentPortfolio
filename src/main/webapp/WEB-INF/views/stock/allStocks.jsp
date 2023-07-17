@@ -28,6 +28,7 @@
                     <a href="/stock/addDetails?stockId=${stock.id}">
                         <button type="button">Add details</button>
                     </a>
+                    <button type="button" onclick="location.href='/stock/stockDetails/${stock.id}'">Show details</button>
                 </td>
             </tr>
         </c:forEach>

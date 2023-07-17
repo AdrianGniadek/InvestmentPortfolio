@@ -2,6 +2,7 @@ package pl.coderslab.portfolio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.coderslab.stock.Stock;
 
 @Service
 public class PortfolioAssetServiceImpl implements PortfolioAssetService {
@@ -23,5 +24,10 @@ public class PortfolioAssetServiceImpl implements PortfolioAssetService {
     @Override
     public PortfolioAsset getPortfolioAssetById(Long id) {
         return portfolioAssetRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Iterable<PortfolioAsset> getPortfolioAssetsByStock(Stock stock) {
+        return portfolioAssetRepository.findByStock(stock);
     }
 }

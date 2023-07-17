@@ -27,7 +27,7 @@
         </c:forEach>
     </table>
     <button type="button" onclick="location.href='/stock/addDetails?stockId=${stock.id}'">Add details</button><br>
-    <button type="button" onclick="location.href='/stock/addDetails?stockId=${stock.id}'">Return</button>
+    <button type="button" onclick="location.href='/stock'">Return</button>
 </div>
 </body>
 </html>
