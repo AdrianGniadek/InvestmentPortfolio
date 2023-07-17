@@ -15,6 +15,15 @@ public class Portfolio {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

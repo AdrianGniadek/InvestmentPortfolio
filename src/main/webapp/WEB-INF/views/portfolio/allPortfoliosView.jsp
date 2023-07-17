@@ -12,6 +12,7 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -19,10 +20,11 @@
         <c:forEach var="portfolio" items="${portfolios}">
             <tr>
                 <td>${portfolio.portfolioName}</td>
-                <td>
-                    <button onclick="location.href='/portfolio/edit/${portfolio.id}'">Edit</button>
-                    <button onclick="location.href='/portfolio/delete/${portfolio.id}'">Delete</button>
-                    <button onclick="location.href='/portfolio/switch/${portfolio.id}'">Switch</button>
+                <td>${portfolio.description}</td>
+                <td class="actions">
+                    <a href="/portfolio/edit/${portfolio.id}">Edit</a>
+                    <a href="/portfolio/delete/${portfolio.id}">Delete</a>
+                    <a href="/portfolio/switch/${portfolio.id}">Switch</a>
                 </td>
             </tr>
         </c:forEach>

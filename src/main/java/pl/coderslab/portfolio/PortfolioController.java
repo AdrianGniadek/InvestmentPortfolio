@@ -39,9 +39,13 @@ public class PortfolioController {
         return "portfolio/editPortfolioView";
     }
     @PostMapping("/portfolio/edit/{id}")
-    public String updatePortfolio(@PathVariable("id") Long id, @RequestParam("name") String name) {
+    public String updatePortfolio(
+            @PathVariable("id") Long id,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description) {
         Portfolio portfolio = portfolioService.getPortfolioById(id);
         portfolio.setPortfolioName(name);
+        portfolio.setDescription(description);
         portfolioService.save(portfolio);
         return "redirect:/portfolios";
     }
