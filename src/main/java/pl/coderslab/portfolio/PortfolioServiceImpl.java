@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.user.User;
+import pl.coderslab.user.UserRepository;
 import pl.coderslab.user.UserService;
 
 import java.util.List;
@@ -14,11 +15,13 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PortfolioServiceImpl(PortfolioRepository portfolioRepository, UserService userService) {
+    public PortfolioServiceImpl(PortfolioRepository portfolioRepository, UserService userService, UserRepository userRepository) {
         this.portfolioRepository = portfolioRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -54,8 +57,17 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public void deletePortfolio(Portfolio portfolio) {
+        List<User> usersWithActivePortfolio = userRepository.findByActivePortfolio(portfolio);
+
+        if (!usersWithActivePortfolio.isEmpty()) {
+            for (User user : usersWithActivePortfolio) {
+                user.setActivePortfolio(null);
+                userRepository.save(user);
+            }
+        }
         portfolioRepository.delete(portfolio);
     }
+
 
     @Override
     public void setActivePortfolio(Portfolio portfolio) {
