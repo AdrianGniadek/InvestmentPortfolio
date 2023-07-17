@@ -4,27 +4,30 @@
 <html>
 <head>
     <title>Stock Details</title>
+    <link rel="stylesheet" type="text/css" href="../../../style.css">
 </head>
 <body>
 <h1>Stock Details</h1>
-<h2>${stock.name} (${stock.symbol})</h2>
+<div class="container">
+    <h2>${stock.name} (${stock.symbol})</h2>
 
-<h3>Portfolio Asset Details</h3>
-<table>
-    <tr>
-        <th>Quantity</th>
-        <th>Asset Value</th>
-        <th>Purchase Date</th>
-    </tr>
-    <c:forEach var="portfolioAsset" items="${portfolioAssets}">
+    <h3>Portfolio Asset Details</h3>
+    <table>
         <tr>
-            <td>${portfolioAsset.quantity}</td>
-            <td>${portfolioAsset.assetValue}</td>
-            <td>${portfolioAsset.purchaseDate}</td>
+            <th>Quantity</th>
+            <th>Asset Value</th>
+            <th>Purchase Date</th>
         </tr>
-    </c:forEach>
-</table>
-<a href="/stock/addDetails?stockId=${stock.id}">Add Details</a>
-<a href="/stock">Return</a>
+        <c:forEach var="portfolioAsset" items="${portfolioAssets}">
+            <tr>
+                <td>${portfolioAsset.quantity}</td>
+                <td>${portfolioAsset.assetValue}</td>
+                <td>${portfolioAsset.purchaseDate}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <button type="button" onclick="location.href='/stock/addDetails?stockId=${stock.id}'">Add details</button><br>
+    <button type="button" onclick="location.href='/stock/addDetails?stockId=${stock.id}'">Return</button>
+</div>
 </body>
 </html>

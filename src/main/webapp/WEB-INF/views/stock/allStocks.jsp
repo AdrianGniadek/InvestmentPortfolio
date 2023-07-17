@@ -4,33 +4,37 @@
 <html>
 <head>
     <title>All Stocks</title>
+    <link rel="stylesheet" type="text/css" href="../../../style.css">
 </head>
 <body>
 <h1>All Stocks</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Symbol</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="stock" items="${stocks}">
+<div class="container">
+    <table>
+        <thead>
         <tr>
-            <td>${stock.symbol}</td>
-            <td>${stock.name}</td>
-            <td>${stock.price}</td>
-            <td>
-                <a href="/stock/addDetails?stockId=${stock.id}">
-                    <button type="button">Dodaj szczegóły</button>
-                </a>
-            </td>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<a href="/stock/add">Dodaj akcję</a>
+        </thead>
+        <tbody>
+        <c:forEach var="stock" items="${stocks}">
+            <tr>
+                <td>${stock.symbol}</td>
+                <td>${stock.name}</td>
+                <td>${stock.price}</td>
+                <td>
+                    <a href="/stock/addDetails?stockId=${stock.id}">
+                        <button type="button">Add details</button>
+                    </a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <button type="button" onclick="location.href='/stock/add'">Add stock</button><br>
+    <button type="button" onclick="location.href='/'">Return</button>
+</div>
 </body>
 </html>

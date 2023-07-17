@@ -69,7 +69,6 @@ public class StockController {
         }
 
         portfolioAsset.setStock(stock);
-        portfolioAsset.setPurchaseDate(LocalDateTime.now());
         portfolioAssetService.savePortfolioAsset(portfolioAsset);
 
         PortfolioAsset updatedPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAsset.getId());
