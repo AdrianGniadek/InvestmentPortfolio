@@ -33,7 +33,7 @@ public class PortfolioAsset {
     }
 
     public void setPurchaseDate(Date date) {
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = date;
     }
 
     public Long getId() {

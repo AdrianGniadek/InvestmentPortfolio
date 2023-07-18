@@ -14,7 +14,7 @@
         <tr>
             <th>Symbol</th>
             <th>Name</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +27,12 @@
                         <button type="button">Add details</button>
                     </a>
                     <button type="button" onclick="location.href='/stock/stockDetails/${stock.id}'">Show details</button>
+                    <a href="/stock/edit/${stock.id}">
+                        <button type="button">Edit</button>
+                    </a>
+                    <a href="/stock/delete/${stock.id}">
+                        <button type="button">Delete</button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>

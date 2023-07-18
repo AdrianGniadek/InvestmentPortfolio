@@ -86,4 +86,46 @@ public class StockController {
         model.addAttribute("portfolioAssets", portfolioAssets);
         return "stock/stockDetailsView";
     }
+    @GetMapping("/edit/{stockId}")
+    public String showEditNameAndSymbolForm(@PathVariable("stockId") Long stockId, Model model) {
+        Stock stock = stockService.getStockById(stockId);
+        if (stock == null) {
+            return "redirect:/stock";
+        }
+        model.addAttribute("stock", stock);
+        return "stock/editStock";
+    }
+
+    @PostMapping("/edit/{stockId}")
+    public String processEditNameAndSymbolForm(@PathVariable("stockId") Long stockId,
+                                               @RequestParam("name") String name,
+                                               @RequestParam("symbol") String symbol) {
+        Stock stock = stockService.getStockById(stockId);
+        if (stock == null) {
+            return "redirect:/stock";
+        }
+        stock.setName(name);
+        stock.setSymbol(symbol);
+        stockService.saveStock(stock);
+        return "redirect:/stock";
+    }
+
+    @GetMapping("/delete/{stockId}")
+    public String showDeleteForm(@PathVariable("stockId") Long stockId, Model model) {
+        Stock stock = stockService.getStockById(stockId);
+        if (stock == null) {
+            return "redirect:/stock";
+        }
+        model.addAttribute("stock", stock);
+        return "stock/deleteStock";
+    }
+
+    @PostMapping("/delete/{stockId}")
+    public String deleteStock(@PathVariable("stockId") Long stockId) {
+        Stock stock = stockService.getStockById(stockId);
+        if (stock != null) {
+            stockService.deleteStock(stock.getId());
+        }
+        return "redirect:/stock";
+    }
 }
