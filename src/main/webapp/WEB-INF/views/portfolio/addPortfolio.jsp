@@ -18,8 +18,8 @@
         </div>
         <div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="submit" class="button" value="Add">
-            <a href="/portfolios" class="button">Cancel</a>
+            <button type="submit">Add</button>
+            <a href="/portfolios"><button type="button">Cancel</button></a>
         </div>
     </form>
 </div>

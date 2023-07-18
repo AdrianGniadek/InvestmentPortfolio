@@ -11,6 +11,7 @@
 <body>
 <div class="container">
     <div class="form-container">
+        <h1>Login</h1>
         <form method="post">
             <div>
                 <label>User Name:</label>
@@ -21,11 +22,10 @@
                 <input type="password" name="password"/>
             </div>
             <div>
-                <label>Portfolio Name:</label>
-                <input type="text" name="portfolioName"/>
-            </div>
-            <div>
-                <input type="submit" value="Sign In"/>
+                <button type="submit">Sign In</button>
+                <a href="/register">
+                    <button type="button">Register</button>
+                </a>
             </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>

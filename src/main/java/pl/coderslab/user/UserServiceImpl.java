@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.portfolio.Portfolio;
 import pl.coderslab.role.Role;
 import pl.coderslab.role.RoleRepository;
 
@@ -43,5 +44,11 @@ public class UserServiceImpl implements UserService {
             return userRepository.findByUsername(username);
         }
         return null;
+    }
+
+    @Override
+    public void setActivePortfolioForUser(User user, Portfolio portfolio) {
+        user.setActivePortfolio(portfolio);
+        userRepository.save(user);
     }
 }

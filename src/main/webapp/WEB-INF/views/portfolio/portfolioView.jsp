@@ -6,9 +6,10 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="center">Witaj w swoim portfolio: ${portfolio.getPortfolioName()}</h1>
-    <a href="/portfolios" class="button">Przejdź do listy portfolio</a>
-    <a href="/stock" class="button">Przejdź do swoich akcji</a>
+    <h1 class="center">Welcome to your portfolio: ${portfolio.getPortfolioName()}</h1>
+    <a href="/portfolios" class="button">Go to portfolio list</a>
+    <a href="/stock" class="button">Go to your stocks</a>
+    <a href="/logout" class="button">Logout</a>
 </div>
 </body>
 </html>
