@@ -40,7 +40,6 @@ StockServiceImpl implements StockService {
             Stock existingStock = stockOptional.get();
             existingStock.setSymbol(stock.getSymbol());
             existingStock.setName(stock.getName());
-            existingStock.setPrice(stock.getPrice());
             stockRepository.save(existingStock);
         }
     }

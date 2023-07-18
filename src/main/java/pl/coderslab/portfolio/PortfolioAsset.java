@@ -1,10 +1,11 @@
 package pl.coderslab.portfolio;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.stock.Stock;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class PortfolioAsset {
@@ -20,17 +21,18 @@ public class PortfolioAsset {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    private BigDecimal quantity;
+    private Integer quantity;
 
     private BigDecimal assetValue;
 
-    private LocalDateTime purchaseDate;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    private Date purchaseDate;
 
-    public LocalDateTime getPurchaseDate() {
+    public Date getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public void setPurchaseDate(Date date) {
         this.purchaseDate = purchaseDate;
     }
 
@@ -58,11 +60,11 @@ public class PortfolioAsset {
         this.stock = stock;
     }
 
-    public BigDecimal getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

@@ -16,7 +16,6 @@ public class Stock {
 
     private String name;
 
-    private BigDecimal price;
     @OneToMany(mappedBy = "stock")
     private List<PortfolioAsset> portfolioAssets;
 
@@ -50,13 +49,5 @@ public class Stock {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }

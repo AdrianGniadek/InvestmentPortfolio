@@ -13,11 +13,13 @@
     <form method="POST">
         <input type="hidden" name="stockId" value="${stock.id}">
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity"><br><br>
-        <label for="assetValue">Asset Value:</label>
-        <input type="number" id="assetValue" name="assetValue"><br><br>
+        <input type="number" id="quantity" name="quantity" step="1"><br><br>
+        <label for="assetValue">Stock Price:</label>
+        <input type="number" id="assetValue" name="assetValue" step="0.01"
+               placeholder="Enter Stock Price" required><br><br>
         <label for="purchaseDate">Purchase Date:</label>
-        <input type="text" id="purchaseDate" name="purchaseDate"><br><br>
+        <input type="text" id="purchaseDate" name="purchaseDate" pattern="\d{2}\.\d{2}\.\d{4}"
+               placeholder="dd.mm.yyyy"><br><br>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Add Details">
         <button type="button" onclick="location.href='/stock'">Return</button><br>

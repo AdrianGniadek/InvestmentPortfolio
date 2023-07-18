@@ -14,7 +14,6 @@
         <tr>
             <th>Symbol</th>
             <th>Name</th>
-            <th>Price</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -23,7 +22,6 @@
             <tr>
                 <td>${stock.symbol}</td>
                 <td>${stock.name}</td>
-                <td>${stock.price}</td>
                 <td>
                     <a href="/stock/addDetails?stockId=${stock.id}">
                         <button type="button">Add details</button>

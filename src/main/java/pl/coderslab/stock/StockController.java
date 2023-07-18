@@ -67,12 +67,9 @@ public class StockController {
         if (stock == null) {
             return "redirect:/stock";
         }
-
         portfolioAsset.setStock(stock);
         portfolioAssetService.savePortfolioAsset(portfolioAsset);
-
         PortfolioAsset updatedPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAsset.getId());
-
         model.addAttribute("stock", stock);
         model.addAttribute("portfolioAsset", updatedPortfolioAsset);
 
