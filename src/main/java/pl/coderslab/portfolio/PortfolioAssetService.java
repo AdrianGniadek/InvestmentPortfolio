@@ -8,4 +8,5 @@ public interface PortfolioAssetService {
     PortfolioAsset getPortfolioAssetById(Long id);
 
     Iterable<PortfolioAsset> getPortfolioAssetsByStock(Stock stock);
+    void deletePortfolioAsset(Long id);
 }

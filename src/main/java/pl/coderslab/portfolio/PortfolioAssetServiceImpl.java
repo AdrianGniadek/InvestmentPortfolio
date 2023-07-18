@@ -30,4 +30,13 @@ public class PortfolioAssetServiceImpl implements PortfolioAssetService {
     public Iterable<PortfolioAsset> getPortfolioAssetsByStock(Stock stock) {
         return portfolioAssetRepository.findByStock(stock);
     }
+
+    @Override
+    public void deletePortfolioAsset(Long id) {
+        PortfolioAsset existingPortfolioAsset = portfolioAssetRepository.findById(id).orElse(null);
+
+        if (existingPortfolioAsset != null) {
+            portfolioAssetRepository.delete(existingPortfolioAsset);
+        }
+    }
 }

@@ -17,12 +17,17 @@
             <th>Quantity</th>
             <th>Asset Value</th>
             <th>Purchase Date</th>
+            <th>Actions</th>
         </tr>
         <c:forEach var="portfolioAsset" items="${portfolioAssets}">
             <tr>
                 <td>${portfolioAsset.quantity}</td>
                 <td>${portfolioAsset.assetValue}</td>
                 <td>${portfolioAsset.purchaseDate}</td>
+                <td>
+                <a href="/stock/editDetails/${stock.id}"><button type="button">Edit</button></a>
+                <a href="/stock/deleteDetails/${stock.id}"><button type="button">Delete</button></a>
+                </td>
             </tr>
         </c:forEach>
     </table>
