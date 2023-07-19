@@ -23,6 +23,7 @@
                 <input type="password" id="confirm" name="confirm"/>
             </div>
             <button type="submit">Register</button>
+            <a href="/login"><button type="button">Return</button></a>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 

@@ -12,8 +12,7 @@
   <h2>${stock.name} (${stock.symbol})</h2>
   <h3>Confirm Deletion</h3>
   <p>Are you sure you want to delete the following portfolio asset?</p>
-  <form action="/stock/deleteDetails/${stock.id}" method="post">
-    <input type="hidden" name="portfolioAssetId" value="${portfolioAsset.id}">
+  <form action="/stock/deleteDetails/${stock.id}/${portfolioAsset.id}" method="post">    <input type="hidden" name="portfolioAssetId" value="${portfolioAsset.id}">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Delete">
     <button type="button" onclick="location.href='/stock/stockDetails/${stock.id}'">Cancel</button>

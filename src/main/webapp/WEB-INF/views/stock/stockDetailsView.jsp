@@ -25,9 +25,8 @@
                 <td>${portfolioAsset.assetValue}</td>
                 <td>${portfolioAsset.purchaseDate}</td>
                 <td>
-                <a href="/stock/editDetails/${stock.id}"><button type="button">Edit</button></a>
-                <a href="/stock/deleteDetails/${stock.id}"><button type="button">Delete</button></a>
-                </td>
+                <a href="/stock/editDetails/${stock.id}/${portfolioAsset.id}"><button type="button">Edit</button></a>
+                    <a href="/stock/deleteDetails/${stock.id}/${portfolioAsset.id}"><button type="button">Delete</button></a>                </td>
             </tr>
         </c:forEach>
     </table>

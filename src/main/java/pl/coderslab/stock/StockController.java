@@ -98,8 +98,7 @@ public class StockController {
 
     @PostMapping("/edit/{stockId}")
     public String processEditNameAndSymbolForm(@PathVariable("stockId") Long stockId,
-                                               @RequestParam("name") String name,
-                                               @RequestParam("symbol") String symbol) {
+    @RequestParam("name") String name, @RequestParam("symbol") String symbol) {
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";
@@ -128,32 +127,38 @@ public class StockController {
         }
         return "redirect:/stock";
     }
-    @GetMapping("/editDetails/{stockId}")
-    public String showEditStockDetailsForm(@PathVariable("stockId") Long stockId, Model model) {
+    @GetMapping("/editDetails/{stockId}/{portfolioAssetId}")
+    public String showEditStockDetailsForm(@PathVariable("stockId") Long stockId,
+    @PathVariable("portfolioAssetId") Long portfolioAssetId, Model model) {
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";
         }
         model.addAttribute("stock", stock);
-        Iterable<PortfolioAsset> portfolioAssets = portfolioAssetService.getPortfolioAssetsByStock(stock);
-        model.addAttribute("portfolioAssets", portfolioAssets);
+        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAssetId);
+        if (existingPortfolioAsset == null || !existingPortfolioAsset.getStock().getId().equals(stockId)) {
+            return "redirect:/stock";
+        }
+        model.addAttribute("portfolioAsset", existingPortfolioAsset);
 
         return "stock/editStockDetails";
     }
 
-    @PostMapping("/editDetails/{stockId}")
+    @PostMapping("/editDetails/{stockId}/{portfolioAssetId}")
     public String processEditStockDetailsForm(@PathVariable("stockId") Long stockId,
-    @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset) {
+    @PathVariable("portfolioAssetId") Long portfolioAssetId, @Valid @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset,
+    BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "stock/editStockDetails";
+        }
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";
         }
-
-        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAsset.getId());
+        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAssetId);
         if (existingPortfolioAsset == null || !existingPortfolioAsset.getStock().getId().equals(stockId)) {
             return "redirect:/stock";
         }
-
         existingPortfolioAsset.setQuantity(portfolioAsset.getQuantity());
         existingPortfolioAsset.setAssetValue(portfolioAsset.getAssetValue());
         existingPortfolioAsset.setPurchaseDate(portfolioAsset.getPurchaseDate());
@@ -162,31 +167,35 @@ public class StockController {
         return "redirect:/stock/stockDetails/" + stockId;
     }
 
-    @GetMapping("/deleteDetails/{stockId}")
-    public String showDeleteStockDetailsForm(@PathVariable("stockId") Long stockId, Model model) {
+    @GetMapping("/deleteDetails/{stockId}/{portfolioAssetId}")
+    public String showDeleteStockDetailsForm(@PathVariable("stockId") Long stockId,
+    @PathVariable("portfolioAssetId") Long portfolioAssetId, Model model) {
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";
         }
         model.addAttribute("stock", stock);
-        Iterable<PortfolioAsset> portfolioAssets = portfolioAssetService.getPortfolioAssetsByStock(stock);
-        model.addAttribute("portfolioAssets", portfolioAssets);
+        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAssetId);
+        if (existingPortfolioAsset == null || !existingPortfolioAsset.getStock().getId().equals(stockId)) {
+            return "redirect:/stock";
+        }
+        model.addAttribute("portfolioAsset", existingPortfolioAsset);
 
         return "stock/deleteStockDetails";
     }
 
-    @PostMapping("/deleteDetails/{stockId}")
+    @PostMapping("/deleteDetails/{stockId}/{portfolioAssetId}")
     public String deleteStockDetails(@PathVariable("stockId") Long stockId,
-    @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset) {
+                                     @PathVariable("portfolioAssetId") Long portfolioAssetId) {
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";
         }
-        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAsset.getId());
+        PortfolioAsset existingPortfolioAsset = portfolioAssetService.getPortfolioAssetById(portfolioAssetId);
         if (existingPortfolioAsset == null || !existingPortfolioAsset.getStock().getId().equals(stockId)) {
             return "redirect:/stock";
         }
-        portfolioAssetService.deletePortfolioAsset(existingPortfolioAsset.getId());
+        portfolioAssetService.deletePortfolioAsset(portfolioAssetId);
 
         return "redirect:/stock/stockDetails/" + stockId;
     }
