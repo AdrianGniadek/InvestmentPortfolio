@@ -9,7 +9,8 @@ import pl.coderslab.portfolio.PortfolioAsset;
 import pl.coderslab.portfolio.PortfolioAssetService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/stock")
@@ -62,6 +63,12 @@ public class StockController {
         if (bindingResult.hasErrors()) {
             return "stock/addStockDetails";
         }
+        try {
+            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(portfolioAsset.getPurchaseDate().toString());
+            portfolioAsset.setPurchaseDate((java.sql.Date) parsedDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
@@ -73,7 +80,7 @@ public class StockController {
         model.addAttribute("stock", stock);
         model.addAttribute("portfolioAsset", updatedPortfolioAsset);
 
-        return "stock/stockDetailsView";
+        return "redirect:/stock";
     }
     @GetMapping("/stockDetails/{stockId}")
     public String showStockDetails(@PathVariable("stockId") Long stockId, Model model) {
@@ -151,6 +158,15 @@ public class StockController {
         if (bindingResult.hasErrors()) {
             return "stock/editStockDetails";
         }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(portfolioAsset.getPurchaseDate().toString());
+            portfolioAsset.setPurchaseDate((java.sql.Date) parsedDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
             return "redirect:/stock";

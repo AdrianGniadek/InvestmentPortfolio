@@ -1,11 +1,10 @@
 package pl.coderslab.portfolio;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.stock.Stock;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class PortfolioAsset {
@@ -25,7 +24,6 @@ public class PortfolioAsset {
 
     private BigDecimal assetValue;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date purchaseDate;
 
     public Date getPurchaseDate() {

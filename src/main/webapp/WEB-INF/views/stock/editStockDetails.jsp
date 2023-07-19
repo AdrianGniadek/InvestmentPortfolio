@@ -12,7 +12,7 @@
     <h2>${stock.name} (${stock.symbol})</h2>
 
     <h3>Edit Portfolio Asset Details</h3>
-    <form action="/stock/editDetails/${stock.id}/${portfolioAsset.id}" method="post">
+    <form method="post">
         <table>
             <tr>
                 <th>Quantity</th>
@@ -22,7 +22,7 @@
             <tr>
                 <td><input type="number" name="quantity" value="${portfolioAsset.quantity}" required></td>
                 <td><input type="number" name="assetValue" value="${portfolioAsset.assetValue}" step="0.01" required></td>
-                <td><input type="text" name="purchaseDate" value="${portfolioAsset.purchaseDate}" required></td>
+                <td><input type="date" name="purchaseDate" value="${portfolioAsset.purchaseDate}" required></td>
             </tr>
         </table>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

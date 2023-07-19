@@ -18,8 +18,7 @@
         <input type="number" id="assetValue" name="assetValue" step="0.01"
                placeholder="Enter Stock Price" required><br><br>
         <label for="purchaseDate">Purchase Date:</label>
-        <input type="text" id="purchaseDate" name="purchaseDate" pattern="\d{2}\.\d{2}\.\d{4}"
-               placeholder="dd.MM.yyyy" required><br><br>
+        <input type="date" id="purchaseDate" name="purchaseDate" pattern="\d{2}\.\d{2}\.\d{4}" required><br><br>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Add Details">
         <button type="button" onclick="location.href='/stock'">Return</button><br>
