@@ -7,6 +7,7 @@
 <body>
 <h1>Error</h1>
 <p>${errorMessage}</p>
+<button type="button" onclick="location.href='/portfolios'">Return</button>
 </body>
 </html>
 

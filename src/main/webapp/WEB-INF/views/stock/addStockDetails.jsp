@@ -13,9 +13,9 @@
     <form method="POST">
         <input type="hidden" name="stockId" value="${stock.id}">
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" step="1"><br><br>
+        <input type="number" id="quantity" name="quantity" step="1" min="0"><br><br>
         <label for="assetValue">Stock Price:</label>
-        <input type="number" id="assetValue" name="assetValue" step="0.01"
+        <input type="number" id="assetValue" name="assetValue" step="0.01" min="0"
                placeholder="Enter Stock Price" required><br><br>
         <label for="purchaseDate">Purchase Date:</label>
         <input type="date" id="purchaseDate" name="purchaseDate" pattern="\d{2}\.\d{2}\.\d{4}" required><br><br>

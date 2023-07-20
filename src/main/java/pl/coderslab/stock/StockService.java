@@ -13,4 +13,7 @@ public interface StockService {
     void updateStock(Stock stock);
 
     void deleteStock(Long id);
+    boolean isStockNameTaken(String name);
+
+    boolean isStockSymbolTaken(String symbol);
 }

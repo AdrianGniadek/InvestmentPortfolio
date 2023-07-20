@@ -10,7 +10,7 @@ import pl.coderslab.portfolio.PortfolioAssetService;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 import java.time.LocalDate;
 
 @Controller
@@ -40,10 +40,22 @@ public class StockController {
     }
 
     @PostMapping("/add")
-    public String processStockForm(@Valid Stock stock, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+    public String processStockForm(@Valid Stock stock, BindingResult bindingResult, Model model) {
+        boolean isNameTaken = stockService.isStockNameTaken(stock.getName());
+        boolean isSymbolTaken = stockService.isStockSymbolTaken(stock.getSymbol());
+
+        if (isNameTaken && isSymbolTaken) {
+            model.addAttribute("nameError", "Portfolio with this name already exists!");
+            model.addAttribute("symbolError", "Portfolio with this symbol already exists!");
+            return "stock/stockForm";
+        } else if (isNameTaken) {
+            model.addAttribute("nameError", "Portfolio with this name already exists!");
+            return "stock/stockForm";
+        } else if (isSymbolTaken) {
+            model.addAttribute("symbolError", "Portfolio with this symbol already exists!");
             return "stock/stockForm";
         }
+
         stockService.saveStock(stock);
         return "redirect:/stock";
     }
@@ -85,7 +97,11 @@ public class StockController {
         }
         model.addAttribute("stock", stock);
         Iterable<PortfolioAsset> portfolioAssets = portfolioAssetService.getPortfolioAssetsByStock(stock);
-        model.addAttribute("portfolioAssets", portfolioAssets);
+        List<PortfolioAsset> portfolioAssetList = new ArrayList<>();
+        portfolioAssets.forEach(portfolioAssetList::add);
+        Collections.sort(portfolioAssetList, Comparator.comparing(PortfolioAsset::getPurchaseDate).reversed());
+        model.addAttribute("portfolioAssets", portfolioAssetList);
+
         return "stock/stockDetailsView";
     }
     @GetMapping("/edit/{stockId}")

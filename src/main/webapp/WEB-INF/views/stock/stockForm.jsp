@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,13 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit">Submit</button>
         <button type="button" onclick="location.href='/stock'">Return</button>
-    </form>
+    </form><br>
+    <c:if test="${not empty symbolError}">
+        <span>${symbolError}</span><br>
+    </c:if>
+
+    <c:if test="${not empty nameError}">
+        <span>${nameError}</span><br>
+    </c:if>
 </div>
 </body>

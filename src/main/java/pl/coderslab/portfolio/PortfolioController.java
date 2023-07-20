@@ -50,8 +50,18 @@ public class PortfolioController {
     public String updatePortfolio(
             @PathVariable("id") Long id,
             @RequestParam("name") String name,
-            @RequestParam("description") String description) {
+            @RequestParam("description") String description,
+            Model model) {
         Portfolio portfolio = portfolioService.getPortfolioById(id);
+
+        if (!portfolio.getPortfolioName().equals(name) && portfolioService.isPortfolioNameTaken(name)) {
+            List<Portfolio> portfolios = portfolioService.getAllPortfoliosForLoggedInUser();
+            model.addAttribute("portfolios", portfolios);
+            model.addAttribute("nameError", "Portfolio with this name already exists!");
+            model.addAttribute("portfolio", portfolio);
+            return "portfolio/editPortfolioView";
+        }
+
         portfolio.setPortfolioName(name);
         portfolio.setDescription(description);
         portfolioService.save(portfolio);

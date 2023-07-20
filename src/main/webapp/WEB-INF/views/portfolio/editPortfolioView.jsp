@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,10 @@
     <input type="text" id="description" name="description" value="${portfolio.description}"><br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Save">
-    <a href="/portfolios"><button type="button">Return</button></a>
+    <a href="/portfolios"><button type="button">Return</button></a><br><br>
+    <c:if test="${not empty nameError}">
+        <span>${nameError}</span><br>
+    </c:if>
 </form>
 </body>
 </html>

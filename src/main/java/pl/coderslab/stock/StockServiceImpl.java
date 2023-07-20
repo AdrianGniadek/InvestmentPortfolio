@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class
-StockServiceImpl implements StockService {
+public class StockServiceImpl implements StockService {
 
     private final StockRepository stockRepository;
 
@@ -47,5 +46,15 @@ StockServiceImpl implements StockService {
     @Override
     public void deleteStock(Long id) {
         stockRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean isStockNameTaken(String name) {
+        return stockRepository.existsByName(name);
+    }
+
+    @Override
+    public boolean isStockSymbolTaken(String symbol) {
+        return stockRepository.existsBySymbol(symbol);
     }
 }

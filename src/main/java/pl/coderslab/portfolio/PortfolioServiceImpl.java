@@ -89,4 +89,8 @@ public class PortfolioServiceImpl implements PortfolioService {
 
         return portfolios.stream().anyMatch(portfolio -> portfolio.getPortfolioName().equals(name));
     }
+    @Override
+    public Portfolio getPortfolioByUsername(String username) {
+        return portfolioRepository.findPortfolioByUserUsername(username);
+    }
 }
