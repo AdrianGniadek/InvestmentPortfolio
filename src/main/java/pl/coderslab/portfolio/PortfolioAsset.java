@@ -1,10 +1,11 @@
 package pl.coderslab.portfolio;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.stock.Stock;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class PortfolioAsset {
@@ -23,14 +24,14 @@ public class PortfolioAsset {
     private Integer quantity;
 
     private BigDecimal assetValue;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate purchaseDate;
 
-    private Date purchaseDate;
-
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date date) {
+    public void setPurchaseDate(LocalDate date) {
         this.purchaseDate = date;
     }
 

@@ -11,6 +11,7 @@ import pl.coderslab.portfolio.PortfolioAssetService;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/stock")
@@ -63,12 +64,6 @@ public class StockController {
         if (bindingResult.hasErrors()) {
             return "stock/addStockDetails";
         }
-        try {
-            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(portfolioAsset.getPurchaseDate().toString());
-            portfolioAsset.setPurchaseDate((java.sql.Date) parsedDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         Stock stock = stockService.getStockById(stockId);
         if (stock == null) {
@@ -80,7 +75,7 @@ public class StockController {
         model.addAttribute("stock", stock);
         model.addAttribute("portfolioAsset", updatedPortfolioAsset);
 
-        return "redirect:/stock";
+        return "redirect:/stock/stockDetails/" + stockId;
     }
     @GetMapping("/stockDetails/{stockId}")
     public String showStockDetails(@PathVariable("stockId") Long stockId, Model model) {
@@ -153,18 +148,10 @@ public class StockController {
 
     @PostMapping("/editDetails/{stockId}/{portfolioAssetId}")
     public String processEditStockDetailsForm(@PathVariable("stockId") Long stockId,
-    @PathVariable("portfolioAssetId") Long portfolioAssetId, @Valid @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset,
-    BindingResult bindingResult, Model model) {
+                                              @PathVariable("portfolioAssetId") Long portfolioAssetId, @Valid @ModelAttribute("portfolioAsset") PortfolioAsset portfolioAsset,
+                                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "stock/editStockDetails";
-        }
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(portfolioAsset.getPurchaseDate().toString());
-            portfolioAsset.setPurchaseDate((java.sql.Date) parsedDate);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         Stock stock = stockService.getStockById(stockId);
