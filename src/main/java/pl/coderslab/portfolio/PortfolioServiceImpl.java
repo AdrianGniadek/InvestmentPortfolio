@@ -80,4 +80,13 @@ public class PortfolioServiceImpl implements PortfolioService {
         User loggedInUser = userService.getLoggedInUser();
         return loggedInUser.getActivePortfolio();
     }
+
+    @Override
+    public boolean isPortfolioNameTaken(String name) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        List<Portfolio> portfolios = portfolioRepository.findAllPortfoliosByUserUsername(username);
+
+        return portfolios.stream().anyMatch(portfolio -> portfolio.getPortfolioName().equals(name));
+    }
 }

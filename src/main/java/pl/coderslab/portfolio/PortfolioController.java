@@ -110,7 +110,13 @@ public class PortfolioController {
     @PostMapping("/add")
     public String addPortfolio(
             @RequestParam("name") String name,
-            @RequestParam("description") String description) {
+            @RequestParam("description") String description,
+            Model model) {
+        if (portfolioService.isPortfolioNameTaken(name)) {
+            model.addAttribute("register", "failed");
+            return "portfolio/addPortfolio";
+        }
+
         Portfolio portfolio = new Portfolio();
         portfolio.setPortfolioName(name);
         portfolio.setDescription(description);

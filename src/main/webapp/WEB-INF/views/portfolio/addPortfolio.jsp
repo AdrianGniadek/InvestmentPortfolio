@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,6 +23,11 @@
             <a href="/portfolios"><button type="button">Cancel</button></a>
         </div>
     </form>
+    <c:if test="${register eq 'failed'}">
+        <div>
+            <p>Portfolio with this name already exists!</p>
+        </div>
+    </c:if>
 </div>
 </body>
 </html>

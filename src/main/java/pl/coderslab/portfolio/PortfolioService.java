@@ -12,4 +12,5 @@ public interface PortfolioService {
 
     void setActivePortfolio(Portfolio portfolio);
     Portfolio getPortfolioForLoggedInUser();
+    boolean isPortfolioNameTaken(String name);
 }
